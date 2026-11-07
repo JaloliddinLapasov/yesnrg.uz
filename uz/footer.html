@@ -1,0 +1,25 @@
+﻿<footer><div class="footer-grid"><div class="footer-brand"><img src="/assets/logo.png" alt="Yes Energy" width="154" height="48"><p>YUQORICHIRCHIQ ENERGY SYSTEMS MChJ — mis va alyuminiy kabel-o‘tkazgich mahsulotlari ishlab chiqaruvchisi.</p></div><div class="footer-col"><h4>Katalog</h4><a href="/uz/catalog/mednaya-shina/">Mis shinasi</a><a href="/uz/catalog/mednyy-prutok/">Mis prutok</a><a href="/uz/catalog/mednyy-provod/">M markali mis sim</a><a href="/uz/catalog/mednyy-emal-provod/">PЭT-155 emal sim</a><a href="/uz/catalog/alyuminievyy-provod/">АС alyuminiy sim</a><a href="/uz/catalog/kabel-sip-4/">СИП-4 kabeli</a></div><div class="footer-col"><h4>Kompaniya</h4><a href="/uz/kabelniy-zavod-tashkent/">Zavod haqida</a><a href="/uz/nashi-klienty/">Mijozlar</a><a href="/uz/blog/">Maqolalar</a><a href="/uz/kontakty/">Kontaktlar</a><a href="/uz/privacy/">Maxfiylik siyosati</a></div><div class="footer-col"><h4>Kontaktlar</h4><a href="tel:+998774083333">+998 77 408-33-33</a><a href="mailto:info@yes-energy.uz">info@yes-energy.uz</a><a href="https://t.me/manager_yesenergy" target="_blank" rel="noopener">Telegram: @manager_yesenergy</a><p>Toshkent viloyati, Yuqorichirchiq tumani, Bardankul, 111902</p><p>Du–Ju: 8:30–17:30</p></div></div><div class="footer-bottom"><span>© 2026 Yes Energy</span><span>yes-energy.uz</span></div></footer>
+<div class="float-btns" style="position:fixed;bottom:24px;right:24px;display:flex;flex-direction:column;gap:10px;z-index:9998"><a href="https://t.me/manager_yesenergy" class="float-btn float-tg" target="_blank" rel="noopener" aria-label="Telegram" style="width:52px;height:52px;border-radius:50%;background:#29A9EB;color:#fff;display:grid;place-items:center;font-weight:800">TG</a><a href="https://wa.me/998774083333" class="float-btn float-wa" target="_blank" rel="noopener" aria-label="WhatsApp" style="width:52px;height:52px;border-radius:50%;background:#25D366;color:#fff;display:grid;place-items:center;font-weight:800">WA</a></div><script>
+function trackEvent(name,params){if(typeof window.gtag==='function')window.gtag('event',name,params||{});}
+async function submitForm(e,page){
+  e.preventDefault();
+  var f=e.target,b=f.querySelector('[type="submit"]'),msg=f.querySelector('.success-msg');
+  var data={name:(f.elements.name||{}).value||'',phone:(f.elements.phone||{}).value||'',email:(f.elements.email||{}).value||'',product:(f.elements.product||{}).value||'',website:(f.elements.website||{}).value||'',page:page||document.title,url:location.href};
+  if(!data.name.trim()||!data.phone.trim())return;
+  if(b){b.disabled=true;b.textContent=document.documentElement.lang==='uz'?'Yuborilmoqda…':'Отправляем…';}
+  try{
+    var r=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)});
+    var result=await r.json();if(!r.ok||!result.ok)throw new Error('send failed');
+    trackEvent('generate_lead',{form_page:data.page,product:data.product});f.reset();
+    if(msg){msg.textContent=document.documentElement.lang==='uz'?'So‘rov yuborildi. Siz bilan bog‘lanamiz.':'Заявка отправлена. Мы свяжемся с вами.';msg.style.display='block';}
+  }catch(err){
+    if(msg){msg.textContent=document.documentElement.lang==='uz'?'Xatolik. +998 77 408-33-33 raqamiga qo‘ng‘iroq qiling.':'Ошибка отправки. Позвоните: +998 77 408-33-33.';msg.style.display='block';msg.style.background='#5a2020';}
+  }finally{if(b){b.disabled=false;b.textContent=document.documentElement.lang==='uz'?'So‘rov yuborish':'Отправить заявку';}}
+}
+function openModal(){document.getElementById('modal').classList.add('active');document.body.style.overflow='hidden';}
+function closeModal(){document.getElementById('modal').classList.remove('active');document.body.style.overflow='';}
+function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var h=a.getAttribute('href')||'';if(h.startsWith('tel:'))trackEvent('click_phone',{link_url:h});else if(h.includes('t.me/'))trackEvent('click_telegram',{link_url:h});else if(h.includes('wa.me/'))trackEvent('click_whatsapp',{link_url:h});});
+document.addEventListener('DOMContentLoaded',function(){var p=location.pathname;document.querySelectorAll('nav a,.mobile-menu a').forEach(function(a){var h=a.getAttribute('href');if(h===p||(h!=='/'&&h!=='/uz/'&&p.startsWith(h)))a.classList.add('active');});});
+</script>
